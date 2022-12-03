@@ -4,13 +4,10 @@ from turtle import st
 import numpy as np
 ungroup = []
 
-
-for x in range(10):
-    row = []
-    for y in range(10):
-        #listed = [0.1, 1, 2, 3, 4, 5, 8]
-        row.append(random.randint(1, 5))
-        #row.append(random.uniform(0.1, 10))
+#reading the data source into a list.
+read = open("inputs/a.in", "r")
+for line in read:
+    row = list(map(int, line.strip().split(" ")))
     ungroup.append(row)
 
 print("The Ungrouped array")
@@ -39,9 +36,9 @@ for i in num_det:
     num_det_roots[i] = int(sqrt(num_det[i]))
 
 
-print(np.array(grouped))
-print(num_det)
-print(num_det_roots)
+print("Sorted List: ", np.array(grouped))
+print("SUmmary of Details" , num_det)
+print("Highest Possible Sqaure: " , num_det_roots)
 
 start = 0
 present_pair = {"height": start, "width": start }
@@ -116,5 +113,6 @@ for h in num_det_roots:
 
 
 
-
+print
+print("The Possible Arrange.")
 print(np.array(answer))
