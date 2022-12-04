@@ -7,7 +7,7 @@ sys.setrecursionlimit(10**6)
 ungroup = []
 
 #reading the data source into a list.
-read = open("inputs/a_lite.in", "r")
+read = open("inputs/a.in", "r")
 for line in read:
     row = list(map(int, line.strip().split(" ")))
     ungroup.append(row)
@@ -82,19 +82,6 @@ def path_is_free(height, width, length):
 
     return ret
 
-def is_free(ran):
-    ret = True
-    for _h in ran:
-        cont = 1
-        for _w in ran:
-            if (answer[__h][__w] == '*' ):
-                ret = False
-                break
-        if cont == 0:
-            break
-
-    return ret
-
 def fill_up(n_mat, value, _dir):
     for h in range(present_pair["height"], present_pair["height"]+n_mat):
         for w in range(present_pair["width"], present_pair["width"]+ n_mat):
@@ -103,8 +90,6 @@ def fill_up(n_mat, value, _dir):
             predefined_pairs.remove([h, w])
             #print(np.array(predefined_pairs))
 
-#path_is_free(range(present_pair["height"], present_pair["height"]+n_mat))
-#print(np.array(predefined_pairs))
 def place_the_matrix():
     placed = 0
     if (present_pair["height"] + n_mat > n):
@@ -122,30 +107,13 @@ def place_the_matrix():
             present_pair["height"] = predefined_pairs[i][0]
             present_pair["width"] = predefined_pairs[i][1]
             #print(present_pair, n_mat)
-            if ((present_pair["height"] + n_mat <= n and present_pair["width"] + n_mat <= n) and (path_is_free(present_pair["height"], present_pair["height"] , n_mat)) ):
-                print(present_pair, n_mat)
+            if ((present_pair["height"] + n_mat <= n and present_pair["width"] + n_mat <= n) and (path_is_free(present_pair["height"], present_pair["width"], n_mat)) ):
+                #print(present_pair, n_mat)
                 fill_up(n_mat, value, "vertical")
                 placed = 1
                 break
         if placed != 1:
-            remains_lst.extend(map(int, list(str(str(value)*(n_mat**2)))) )
-     
-    # if(placed == 1):
-    #     break
-    # else:
-    #     place_the_matrix()
-            #place_the_matrix()
-    # elif (path_is_free(range(present_pair["height"], present_pair["height"]+n_mat)) ):
-    #     present_pair["height"] = present_pair["height"]  + 1
-    # elif (path_is_free(range(present_pair["width"], present_pair["width"]+n_mat)) ):
-    #     present_pair["width"] = present_pair["width"]  + 1
-
-
-    # print("The Possible Arrange.")
-    # print(np.array(answer))
-
-    # elif (present_pair["width"] + n_mat <= n):
-    #     fill_up(n_mat, value, "horizontal")    
+            remains_lst.extend(map(int, list(str(str(value)*(n_mat**2)))) )  
 
 for h in num_det_roots:
     value = h
